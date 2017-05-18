@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+}
+
+body { 
+  background: url(../images/background.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body * {
+    position: absolute;
+    display: block;
+    margin:0px; padding:0px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+hero {
+  background-image: url(../images/hero.png);
+  width: 69px; 
+  height: 69px;
+}
