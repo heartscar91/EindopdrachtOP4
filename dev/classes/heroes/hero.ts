@@ -1,24 +1,25 @@
 class Hero extends gameObject {
 
-    private directionX: number = 0;
-    private directionY: number = 0;
     private game : Game;
     private speed: number = 0;
-    private animationSpeed: number = 0;
     private currentFrame: number = 0;
-    private animationY: number = 0;
 
-    constructor(game : Game, x : number, y : number) {
+    constructor(game : Game, x : number, y : number, height : number, width : number, health : number, power : number, defense : number) {
         super('hero');
         this.game = game;
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
+        this.health = health;
+        this.power = power;
+        this.defense = defense;
         this.speed = 3;
-        this.animationSpeed = 10;
         
+        this.showHealth();
         this.draw();
         window.addEventListener("keydown", (e) => this.onKeyDown(e));
-        window.addEventListener("keyup"  , (e) => this.onKeyUp(e));
+        this.div.addEventListener("click", (e) => this.Hit());
     }
 
     public draw() : void {
@@ -33,41 +34,49 @@ class Hero extends gameObject {
             case 38: //UP
                 this.y -= 10;
                 this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
-                this.animationY = 3;
+                this.div.style.background = "url(./images/hero-front.png)";
                 break;
             case 39: //RIGHT
                 this.x += 10;
                 this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
-                this.animationY = 2
+                this.div.style.background = "url(./images/hero.png) -66px -134px";
                 break;
             case 40: //DOWN
                 this.y += 10;
                 this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
-                this.animationY = 0;
+                this.div.style.background = "url(./images/hero-front.png)";
                 break;
             case 37: //LEFT
                 this.x -= 10;
                 this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
-                this.animationY = 1;
+                this.div.style.background = "url(./images/hero.png) -66px -68px";
+                break;
+            case 32:
+                this.Attack();
                 break;
         }
     }
 
-        // speed op 0 alleen als de eigen keys zijn losgelaten
-    protected onKeyUp(event:KeyboardEvent):void {
-        switch(event.keyCode){
-            case 38: //UP
-                this.directionY = 0;
-                break;
-            case 39: //RIGHT
-                this.directionX = 0;
-                break;
-            case 40: //DOWN
-                this.directionY = 0;
-                break;
-            case 37: //LEFT
-                this.directionX = 0;
-                break;
+    private showHealth() {
+        let healthBar = document.getElementById('healthBar');
+        
+        if (this.health == 0) {
+            healthBar.innerHTML = this.health;
+            alert("GAME OVER");
         }
+
+        healthBar.innerHTML = this.health;
+    }
+
+    private Attack() {
+        let audio = new Audio('./sounds/punch.mp3');
+        audio.play();
+    }
+
+    private Hit() : void {
+        let audio = new Audio('./sounds/punch.mp3');
+        audio.play();
+        this.health -= 1;
+        this.showHealth();
     }
 }

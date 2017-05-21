@@ -5,9 +5,14 @@ class Game {
     private container : HTMLElement;
 
     constructor() {
-        let heros : Array<Hero> = new Array<Hero>();
-        heros.push(
-            new Hero(this, 900, 650),
+        let heroes : Array<Hero> = new Array<Hero>();
+        heroes.push(
+            new Hero(this, 900, 650, 67, 67, 10, 3, 2)
+        );
+
+        let enemies : Array<Enemy> = new Array<Enemy>();
+        enemies.push(
+            new Enemy(this, 200, 650, 20, 200, 10, 3, 2)
         );
 
         requestAnimationFrame(() => this.gameLoop());

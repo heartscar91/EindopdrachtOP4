@@ -4,9 +4,11 @@ class gameObject {
     protected body : HTMLElement;
     protected x : number;
     protected y : number;
-    protected health : number
-    protected power : number
-    protected defense : number
+    protected height : number;
+    protected width : number;
+    protected health : number;
+    protected power : number;
+    protected defense : number;
 
     constructor(tag : string) {
         this.createDiv(tag);

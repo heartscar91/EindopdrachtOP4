@@ -1,6 +1,5 @@
 * {
-    padding: 0;
-    margin: 0 auto;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body { 
@@ -14,13 +13,28 @@ body {
 body * {
     position: absolute;
     display: block;
-    margin:0px; padding:0px;
+    margin: 0px; 
+    padding:0px;
     box-sizing: border-box;
     background-repeat: no-repeat;
 }
 
 hero {
-  background-image: url(../images/hero.png);
-  width: 69px; 
-  height: 69px;
+  background: url(../images/hero.png) -66px 0;
+  width: 67px; 
+  height: 67px;
+}
+
+enemy {
+  background: url(../images/enemy.png) -110px -100px;
+  width: 120px; 
+  height: 110px;
+}
+
+#healthBar {
+  background-color: red;
+  width: 200px;
+  height: 20px;
+  color: white;
+  font-size: 18px;
 }
