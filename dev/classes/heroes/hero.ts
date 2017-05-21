@@ -27,7 +27,7 @@ class Hero extends gameObject {
     } 
 
     // keyboard input zorgt dat de snelheid wordt aangepast
-    private onKeyDown(event:KeyboardEvent):void {
+    protected onKeyDown(event:KeyboardEvent):void {
         console.log(event.keyCode);
         switch(event.keyCode){
             case 38: //UP
@@ -54,7 +54,7 @@ class Hero extends gameObject {
     }
 
         // speed op 0 alleen als de eigen keys zijn losgelaten
-    private onKeyUp(event:KeyboardEvent):void {
+    protected onKeyUp(event:KeyboardEvent):void {
         switch(event.keyCode){
             case 38: //UP
                 this.directionY = 0;
