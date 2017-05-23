@@ -10,7 +10,6 @@ var Game = (function () {
         heroes.push(new Hero(this, 900, 650, 67, 67, 10, 3, 2));
         var enemies = new Array();
         enemies.push(new Enemy(this, 200, 650, 20, 200, 5, 3, 2));
-        this.checkCollision();
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Game.prototype.gameLoop = function () {
@@ -22,16 +21,6 @@ var Game = (function () {
             Game.instance = new Game();
         }
         return Game.instance;
-    };
-    Game.prototype.checkCollision = function () {
-        for (var _i = 0, _a = this.heroes; _i < _a.length; _i++) {
-            var hero = _a[_i];
-            for (var _b = 0, _c = this.enemies; _b < _c.length; _b++) {
-                var enemy = _c[_b];
-                if (hero.hasCollision(enemy)) {
-                }
-            }
-        }
     };
     return Game;
 }());
@@ -46,6 +35,10 @@ var gameObject = (function () {
         var container = document.getElementById("container");
         this.div = document.createElement(tag);
         container.appendChild(this.div);
+        this.draw();
+    };
+    gameObject.prototype.draw = function () {
+        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     return gameObject;
 }());
@@ -57,9 +50,6 @@ var Healthbar = (function () {
         this.div.appendChild(this.p);
         this.p.innerHTML = health;
     }
-    Healthbar.prototype.change = function () {
-        this.div.style.width = '90%';
-    };
     return Healthbar;
 }());
 var Enemy = (function (_super) {
@@ -124,9 +114,6 @@ var Hero = (function (_super) {
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         this.div.addEventListener("click", function (e) { return _this.hit(); });
     }
-    Hero.prototype.draw = function () {
-        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
-    };
     Hero.prototype.onKeyDown = function (event) {
         switch (event.keyCode) {
             case 38:

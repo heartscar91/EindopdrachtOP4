@@ -1,4 +1,4 @@
-class gameObject {
+class gameObject implements iDrawable {
 
     protected div : HTMLElement;
     protected body : HTMLElement;
@@ -21,5 +21,11 @@ class gameObject {
         let container : HTMLElement = document.getElementById("container");
         this.div = document.createElement(tag);
         container.appendChild(this.div);
+        this.draw();
+    }
+
+    public draw() {
+        // 'tekend' de div
+        this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
     }
 }

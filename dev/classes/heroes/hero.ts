@@ -1,6 +1,7 @@
 class Hero extends gameObject {
 
     private equipped: boolean = false;
+    private behaviour : Walking;
 
     constructor(game : Game, x : number, y : number, height : number, width : number, health : number, power : number, defense : number) {
         super('hero');
@@ -19,10 +20,10 @@ class Hero extends gameObject {
         this.div.addEventListener("click", (e) => this.hit());
     }
 
-    public draw() : void {
-        // 'tekend' de div
-        this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
-    } 
+    // public draw() : void {
+    //     // 'tekend' de div
+    //     this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
+    // } 
 
     // keyboard input zorgt dat de snelheid wordt aangepast
     protected onKeyDown(event:KeyboardEvent) : void {

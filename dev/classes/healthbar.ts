@@ -13,7 +13,7 @@ class Healthbar {
         this.p.innerHTML = health;
     }
 
-    public change() {
-        this.div.style.width = '90%';
-    }
+    // public change() {
+    //     this.div.style.width = '90%';
+    // }
 }
