@@ -1,9 +1,5 @@
 class Enemy extends gameObject {
 
-    private game : Game;
-    private speed: number = 0;
-    private currentFrame: number = 0;
-
     constructor(game : Game, x : number, y : number, height : number, width : number, health : number, power : number, defense : number) {
         super('enemy');
         this.game = game;
@@ -14,10 +10,10 @@ class Enemy extends gameObject {
         this.health = health;
         this.power = power;
         this.defense = defense;
-        this.speed = 3;
         
+        this.showHealth();
         this.draw();
-        this.div.addEventListener("click", (e) => this.Hit());
+        this.div.addEventListener("click", (e) => this.hit());
     }
 
     public draw() : void {
@@ -25,9 +21,20 @@ class Enemy extends gameObject {
         this.div.style.transform ="translate(" + this.x + "px," + this.y + "px)";
     } 
 
-    private Hit() : void {
+    private hit() : void {
         let audio = new Audio('./sounds/punch.mp3');
         audio.play();
         this.health -= 1;
+        this.showHealth();
+    }
+
+    private showHealth() : void {
+        let healthBar = new Healthbar(this.div, this.health);
+
+        if (this.health == 0) {
+            this.div.remove();
+            healthBar.innerHTML = this.health;
+        }
+        healthBar.innerHTML = this.health;
     }
 }

@@ -1,13 +1,8 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -43,57 +38,78 @@ var gameObject = (function () {
     };
     return gameObject;
 }());
+var Healthbar = (function () {
+    function Healthbar(parent, health) {
+        this.div = document.createElement("healthbar");
+        parent.appendChild(this.div);
+        this.p = document.createElement('p');
+        this.div.appendChild(this.p);
+        this.p.innerHTML = health;
+    }
+    Healthbar.prototype.change = function () {
+        this.div.style.width = '90%';
+    };
+    return Healthbar;
+}());
 var Enemy = (function (_super) {
     __extends(Enemy, _super);
-    function Enemy(game, x, y, health, power, defense) {
-        var _this = _super.call(this, 'enemy') || this;
-        _this.speed = 0;
-        _this.currentFrame = 0;
-        _this.game = game;
-        _this.x = x;
-        _this.y = y;
-        _this.health = health;
-        _this.power = power;
-        _this.defense = defense;
-        _this.speed = 3;
-        _this.draw();
-        _this.div.addEventListener("click", function (e) { return _this.Hit(); });
-        return _this;
+    function Enemy(game, x, y, height, width, health, power, defense) {
+        var _this = this;
+        _super.call(this, 'enemy');
+        this.game = game;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.health = health;
+        this.power = power;
+        this.defense = defense;
+        this.showHealth();
+        this.draw();
+        this.div.addEventListener("click", function (e) { return _this.hit(); });
     }
     Enemy.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
-    Enemy.prototype.Hit = function () {
+    Enemy.prototype.hit = function () {
         var audio = new Audio('./sounds/punch.mp3');
         audio.play();
         this.health -= 1;
+        this.showHealth();
+    };
+    Enemy.prototype.showHealth = function () {
+        var healthBar = new Healthbar(this.div, this.health);
+        if (this.health == 0) {
+            this.div.remove();
+            healthBar.innerHTML = this.health;
+        }
+        healthBar.innerHTML = this.health;
     };
     return Enemy;
 }(gameObject));
 var Hero = (function (_super) {
     __extends(Hero, _super);
-    function Hero(game, x, y, health, power, defense) {
-        var _this = _super.call(this, 'hero') || this;
-        _this.speed = 0;
-        _this.currentFrame = 0;
-        _this.game = game;
-        _this.x = x;
-        _this.y = y;
-        _this.health = health;
-        _this.power = power;
-        _this.defense = defense;
-        _this.speed = 3;
-        _this.showHealth();
-        _this.draw();
+    function Hero(game, x, y, height, width, health, power, defense) {
+        var _this = this;
+        _super.call(this, 'hero');
+        this.equipped = false;
+        this.game = game;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.health = health;
+        this.power = power;
+        this.defense = defense;
+        this.showHealth();
+        this.draw();
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-        _this.div.addEventListener("click", function (e) { return _this.Hit(); });
-        return _this;
+        this.div.addEventListener("click", function (e) { return _this.hit(); });
     }
     Hero.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     Hero.prototype.onKeyDown = function (event) {
-        console.log(event.keyCode);
         switch (event.keyCode) {
             case 38:
                 this.y -= 10;
@@ -116,28 +132,47 @@ var Hero = (function (_super) {
                 this.div.style.background = "url(./images/hero.png) -66px -68px";
                 break;
             case 32:
-                this.Attack();
+                this.attack();
+                break;
+            case 73:
+                this.inventory();
                 break;
         }
     };
     Hero.prototype.showHealth = function () {
-        var healthBar = document.getElementById('healthBar');
+        var healthBar = new Healthbar(this.div, this.health);
         if (this.health == 0) {
             healthBar.innerHTML = this.health;
             alert("GAME OVER");
+            location.reload();
         }
         healthBar.innerHTML = this.health;
     };
-    Hero.prototype.Attack = function () {
+    Hero.prototype.attack = function () {
         var audio = new Audio('./sounds/punch.mp3');
         audio.play();
     };
-    Hero.prototype.Hit = function () {
+    Hero.prototype.hit = function () {
         var audio = new Audio('./sounds/punch.mp3');
+        var percent = document.getElementById('percent');
         audio.play();
         this.health -= 1;
         this.showHealth();
     };
+    Hero.prototype.inventory = function () {
+        var inventory = document.getElementById('inventory');
+        if (inventory.className == 'closed') {
+            inventory.className = 'open';
+        }
+        else if (inventory.className == 'open') {
+            inventory.className = 'closed';
+        }
+    };
     return Hero;
 }(gameObject));
+var Inventory = (function () {
+    function Inventory() {
+    }
+    return Inventory;
+}());
 //# sourceMappingURL=main.js.map

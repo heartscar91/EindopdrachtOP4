@@ -1,7 +1,6 @@
 class Game {
 
     private static instance: Game;
-    private hero : Hero;
     private container : HTMLElement;
 
     constructor() {
