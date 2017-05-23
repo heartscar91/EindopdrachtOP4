@@ -20,36 +20,4 @@ Qua installatie hoeft er niks te gebeuren, je hoeft alleen het project te clonen
 
 ## Klassendiagram (UML)
 
-![UML](uml.png?raw=true "UML")
-
-## Programmeerprincipes
-
-Iets over de programmeerprincipes
-
-### Interface
-
-Iets over..
-
-### Static Utility Method
-
-Iets over..
-
-### Singleton
-
-Iets over..
-
-### Strategy
-
-Iets over..
-
-### Encapsulation
-
-Iets over..
-
-### Composition
-
-Iets over..
-
-### Inheritance
-
-Iets over..
+![UML](./dist/images/uml.png?raw=true "UML")
