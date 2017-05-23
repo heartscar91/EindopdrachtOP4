@@ -22,8 +22,15 @@ class Enemy extends gameObject {
     } 
 
     private hit() : void {
-        let audio = new Audio('./sounds/punch.mp3');
-        audio.play();
+        if(this.health < 2) {
+            let audio = new Audio('./sounds/defeat.wav');
+            audio.play();
+        } else {
+            let audio = new Audio('./sounds/punch.mp3');
+            audio.play();
+        }
+        
+        console.log(this.health);
         this.health -= 1;
         this.showHealth();
     }

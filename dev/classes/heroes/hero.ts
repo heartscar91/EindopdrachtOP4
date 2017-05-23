@@ -84,6 +84,13 @@ class Hero extends gameObject {
         this.showHealth();
     }
 
+    public hasCollision(enemy : Enemy) : boolean {
+        return (this.x < enemy.x + enemy.width &&
+                this.x + this.width > enemy.x &&
+                this.y < enemy.y + enemy.height &&
+                this.y + this.height > enemy.y);
+    }
+
     // private Equip() {
     //     let sword = document.getElementById('sword');
     //     sword.addEventListener("click", (e) => this.Check());
