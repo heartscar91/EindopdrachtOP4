@@ -7,7 +7,7 @@ Dit project is gemaakt voor Programmeren OP4. Je speelt in deze game een hero, d
 ### Controls
 
 - Je kan lopen door middel van de pijltjestoetsen.
-- Je kan aanvallen door middel van de spatiebalk
+- Je kan aanvallen door middel van de spatiebalk ( werkt nog niet helemaal, voor nu kan je op beide sprites klikken ).
 - Je kan je inventory openen door middel van de I toets.
 
 ## Door
@@ -20,36 +20,26 @@ Qua installatie hoeft er niks te gebeuren, je hoeft alleen het project te clonen
 
 ## Klassendiagram (UML)
 
-![UML](uml.png?raw=true "UML")
+![UML](./dist/images/uml.png?raw=true "UML")
 
 ## Programmeerprincipes
 
-Iets over de programmeerprincipes
-
 ### Interface
 
-Iets over..
+Ik gebruik de iDrawable interface (te vinden in het mapje interfaces). Deze wordt gebruikt als blueprint voor het 'tekenen' van de sprites.
 
 ### Static Utility Method
 
-Iets over..
+Ik gebruik een static method (getInstance) voor de Singleton.
 
 ### Singleton
 
-Iets over..
-
-### Strategy
-
-Iets over..
+Ik heb de Game Class, een singleton gemaakt. Deze is door middel van `let g = Game.getInstance();`.
 
 ### Encapsulation
 
-Iets over..
-
-### Composition
-
-Iets over..
+Ik gebruik bij elke class in mijn game `public`, `private`, en `protected`.
 
 ### Inheritance
 
-Iets over..
+`class Enemy extends gameObject { }`
